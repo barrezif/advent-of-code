@@ -6,7 +6,7 @@ def get_puzzle_input():
     puzzle_input = [line for line in file.read().split('\n')]
     return puzzle_input
 
-def get_and_save_intermittend_lines(line, points):
+def get_and_save_intermittent_lines(line, points):
     x1, y1 = [int(point) for point in line[0].split(',')]
     x2, y2 = [int(point) for point in line[1].split(',')]
 
@@ -33,7 +33,7 @@ def main():
     points = {}
     points = defaultdict(lambda:0, points)
     for line in puzzle_input:
-        get_and_save_intermittend_lines([point for point in line.split(' -> ')], points)
+        get_and_save_intermittent_lines([point for point in line.split(' -> ')], points)
     
     return len([val for val in points.values() if val > 1]) 
 
