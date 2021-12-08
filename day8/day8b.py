@@ -38,6 +38,7 @@ def deduce(digit, cache):
         case other:
             return known[other]
 
+        
 def translate(final, cache):    
     return int("".join([deduce(num, cache) for num in final.split(" ")]))
 
