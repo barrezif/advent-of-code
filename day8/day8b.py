@@ -16,6 +16,7 @@ def get_initial_config(line):
 
     return cache
 
+
 def deduce(digit, cache):
     """ given a digit, this compares values in digit's character set to deduce value """
     known = {2: "1", 4: "4", 3: "7", 7: "8"}
