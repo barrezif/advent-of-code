@@ -22,7 +22,7 @@ def get_initial_config(line):
                 cache[8] = set(digit.strip())
     return cache
 
-def convert(digit, cache):
+def deduce(digit, cache):
     """ given a digit, this compares values in digit's character set to deduce value """
     known = {2: "1", 4: "4", 3: "7", 7: "8"}
     match len(digit):
@@ -44,7 +44,7 @@ def convert(digit, cache):
             return known[other]
 
 def translate(final, cache):    
-    return int("".join([convert(num, cache) for num in final.split(" ")]))
+    return int("".join([deduce(num, cache) for num in final.split(" ")]))
 
 
 def main():
