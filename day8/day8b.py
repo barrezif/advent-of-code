@@ -11,15 +11,9 @@ def get_initial_config(line):
     """ loads unique lengthed numbers into dictionary """
     cache = {}
     for digit in line.split(" "):
-        match len(digit.strip()):
-            case 2:
-                cache[1] = set(digit.strip())
-            case 4:
-                cache[4] = set(digit.strip())
-            case 3:
-                cache[7] = set(digit.strip())
-            case 7:
-                cache[8] = set(digit.strip())
+        digit = digit.strip()
+        cache[len(digit)] = set(digit)
+
     return cache
 
 def deduce(digit, cache):
