@@ -8,13 +8,8 @@ def get_puzzle_input():
 
 
 def get_initial_config(line):
-    """ loads unique lengthed numbers into dictionary """
-    cache = {}
-    for digit in line.split(" "):
-        digit = digit.strip()
-        cache[len(digit)] = set(digit)
-
-    return cache
+    """ saves lengths in a dict with their respective characters """
+    return {len(digit): set(digit) for digit in line.split(" ")}
 
 
 def deduce(digit, cache):
@@ -24,12 +19,12 @@ def deduce(digit, cache):
         case 6:
             if len(set(digit).union(cache[4])) == 6:
                 return "9"
-            elif len(set(digit).intersection(cache[1])) == 2:
+            elif len(set(digit).intersection(cache[2])) == 2:
                 return "0"
             else:
                 return "6"
         case 5:
-            if len(set(digit).union(cache[1])) == len(set(digit)):
+            if len(set(digit).union(cache[2])) == len(set(digit)):
                 return "3"
             elif len(set(digit).union(cache[4])) == 7:
                 return "2"
