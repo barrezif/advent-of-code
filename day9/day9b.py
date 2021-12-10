@@ -12,22 +12,6 @@ def get_adjacent_squares(x, y):
     directions = [(-1,0), (1,0), (0,1), (0,-1)]
     return [(i + x, j + y) for i, j in directions if 0 <= i + x < row_bound and 0 <= j + y < col_bound]
 
-def main():
-    global puzzle, seen
-    puzzle = get_puzzle_input_lines()
-    
-    basins = []
-    seen = []
-    
-    for i in range(len(puzzle)):
-        for j in range(len(puzzle[i])):
-            basin = traverse(i, j, [])
-            if basin:
-                basins.append(len(basin))
-    
-    basins = sorted(basins, reverse=True)
-    return basins[0] * basins[1] * basins[2]
-
 
 def traverse(i,j, current_basin):
     """ dfs traversal. Skips over squares we've already seen """
@@ -41,6 +25,23 @@ def traverse(i,j, current_basin):
         for x, y in get_adjacent_squares(i,j):
             traverse(x, y, current_basin)
         return current_basin
+
+
+def main():
+    global puzzle, seen
+    puzzle = get_puzzle_input_lines()
+    
+    basins = []
+    seen = []
+    
+    for i in range(len(puzzle)):
+        for j in range(len(puzzle[i])):
+            if basin := traverse(i, j, []):
+                basins.append(len(basin))
+    
+    basins = sorted(basins, reverse=True)
+    return basins[0] * basins[1] * basins[2]
+
 
 if __name__ == '__main__':  
     print(main())
