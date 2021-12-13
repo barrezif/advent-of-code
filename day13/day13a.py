@@ -77,11 +77,11 @@ def main():
     folds = get_folds(fold_input)
     sheet = setup_sheet(width, height, coords)
     
-    for f in folds:
-        sheet = fold(sheet, f[1], f[0])
+    x_axis, fold_point  = folds[0]
 
-    for row in sheet:
-        print(row)
+    sheet = fold(sheet, fold_point, x_axis)
+
+    return sum([sum([1 for num in row if num == '@']) for row in sheet])
     
 if __name__ == '__main__':
-    main()
+    print(main())
