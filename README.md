@@ -15,8 +15,8 @@ To make this easier, I added this alias to my `.zshrc`.
 
 ```
 aoc() { 
-    echo "Hello... Setting up your AOC environment for $
-    cd /Users/ibarrezueta/Desktop/projects/code/advent-$
+    echo "Hello... Setting up your AOC environment for $1 day $2"
+    cd path/to/aoc/root
     echo "Moved to the AOC directory"
     source setup.sh $1 $2 $(<.session.txt)
     echo "Pulled the input and set up your python file"
