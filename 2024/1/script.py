@@ -1,16 +1,3 @@
-#!/bin/sh
-
-echo "Creating files for day $2"
-
-DIR_NAME="./$1/$2/"
-INPUT_FILE="input.txt"
-PYTHON_FILE="script.py"
-
-mkdir -p $DIR_NAME/
-wget -O "$DIR_NAME/$INPUT_FILE" --no-cookies --header "Cookie: session=$3" https://adventofcode.com/$1/day/$2/input
-
-
-cat > $DIR_NAME/$PYTHON_FILE << EOF
 from collections import defaultdict, Counter
 from enum import Enum
 
@@ -54,40 +41,60 @@ def get_puzzle_input(groupType, splitter=None):
 
 def part1():
     # LINE, LINE_INT, COMMA, COMMA_INT, BLOCK, LINE_SPLIT_BY
-    pInput = get_puzzle_input(InputGroup.)
+    pInput = get_puzzle_input(InputGroup.LINE_SPLIT_BY, "   ")
+    
+    left = []
+    right = []
+    for l, r in pInput:
+        left.append(l)
+        right.append(r)
+    left = sorted(left)
+    right = sorted(right)
+    
+    res = []
+    
+    for l, r in zip(left, right):
+        res.append(abs(int(l)-int(r)))
+
     print(pInput, end="\n\n\n")
 
 
-    res = []
 
-    return res
+    return sum(res)
 
 def part2():
     # LINE, LINE_INT, COMMA, COMMA_INT, BLOCK, LINE_SPLIT_BY
-    pInput = get_puzzle_input(InputGroup.)
+    pInput = get_puzzle_input(InputGroup.LINE_SPLIT_BY, "   ")
+    
+    left = []
+    right = []
+    for l, r in pInput:
+        left.append(l)
+        right.append(r)
+
+    right_counts = Counter(right)
+    
+    res = []
+    
+    for l in left:
+        res.append(int(l) * int(right_counts[l]))
+
     print(pInput, end="\n\n\n")
 
 
-    res = []
 
-    return res
+    return sum(res)
+
 
 def main():
     print("           ", part1())
     print("PART 1 ^^^^^^^^^^^^^^^^^^")
 
-    res_2 = part2()
-    if res_2:
-        print(res_2)
-        print("PART 2 ^^^^^^^^^^^^^^^^^^")
+    print("           ", part2())
+    print("PART 2 ^^^^^^^^^^^^^^^^^^")
+
 
 if __name__ == '__main__':
     main()
 
-
-EOF
-
-
-cd $DIR_NAME
-code -a . ./$PYTHON_FILE
 
